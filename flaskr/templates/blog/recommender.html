@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h3 class = "uk-text-center uk-light">Recommendations</h3>
+{% endblock %}
+
+{% block content %}
+<div class="uk-child-width-1-2 uk-child-width-1-3@s uk-child-width-1-6@m uk-text-center uk-grid-small" uk-grid >
+
+    {% for movie in movies %}
+    <!-- Another type of card that uses images -->
+    <div>
+        <div class="uk-card uk-card-default">
+            <div class="uk-card-media-top">
+                <img src="{{ url_for('static', filename = 'poster3.png')}}" alt="">
+            </div>
+            <div class="uk-card-body">
+                <h3 class="uk-card-title">{{movie['title']}}</h3>
+                <p>Genres:
+                {% for genre in movie['GENRES'].split('|')%}
+                {{genre}}
+                {% endfor %}
+                </p>
+            </div>
+            <div class="uk-card-footer uk-padding-remove">
+              <div class="rate uk-text-large" id ="{{'movie' ~  movie['id']}}"></div>
+
+              <script type="text/javascript">
+                options = {
+                  max_value: 5,
+                  step_size: 0.5,
+                  initial_value: 0,
+                  selected_symbol_type: 'utf8_star', // Must be a key from symbols
+                  cursor: 'default',
+                  readonly: false,
+                  change_once: false, // Determines if the rating can only be set once
+                  ajax_method: 'POST',
+                  url: '{{ url_for('blog.add', id=movie['id']) }}', // change this when i have this working
+                  additional_data: {}, // Additional data to send to the server
+                  // update_input_field_name: $('#input2')
+                  }
+                $("#{{'movie' ~ movie['id']}}").rate(options)
+              </script>
+
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+ <div>
+    {% if page > 1%}
+    <a href="{{url_for('index', page= page - 1 )}}"> {{_('Previous Page')}} </a>
+    {% endif %}
+    <a href="{{url_for('index', page= page + 1 )}}"> {{_('Next Page')}} </a>
+  </div>
+
+
+{% endblock %}
+
+
+

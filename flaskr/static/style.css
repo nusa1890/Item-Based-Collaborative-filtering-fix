@@ -1,0 +1,54 @@
+
+
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+.uk-h1, .uk-h2, .uk-h3, .uk-h4, .uk-h5, .uk-h6, h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif !important;
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 80px minmax(calc(100vh - 110px), auto) 60px;
+  grid-template-areas: "Header" "Movies" "Footer";
+}
+
+.Header {
+    grid-area: Header;
+}
+
+.Footer { grid-area: Footer; }
+
+.Movies {
+    grid-area: Movies;
+}
+
+#logo {
+    padding-top: 20px;
+    padding-left: 10px;
+    height: 60px;
+    width: 80px;
+}
+
+.uk-card-body {
+    padding: 0px !important;
+}
+
+.logo {
+    padding-left: 15px;
+    filter: invert(100%);
+}
+
+.rate-base-layer
+        {
+            color: #aaa;
+        }
+.rate-hover-layer
+{
+    color: orange;
+}
+.rate {
+  margin: auto;
+}
