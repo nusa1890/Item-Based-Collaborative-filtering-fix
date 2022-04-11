@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %} - Flaskr</title>
@@ -27,63 +28,90 @@
 
 </head>
 
-<body class = "uk-background-secondary">
+<body class="uk-background-secondary">
     <div class="grid-container">
         <div class="Header">
-            <div class = "uk-background-secondary" uk-sticky="show-on-up: true; animation: uk-animation-slide-top; sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky; bottom: #scrollup-dropdown" uk-navbar>
-                    <!-- <img src="movie_logo.png" id = "logo"> -->
-                    <div class="uk-navbar-left">
+            <div class="uk-background-secondary"
+                uk-sticky="show-on-up: true; animation: uk-animation-slide-top; sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky; bottom: #scrollup-dropdown"
+                uk-navbar>
+                <!-- <img src="movie_logo.png" id = "logo"> -->
+                <div class="uk-navbar-left">
 
-                        <ul class="uk-navbar-nav">
-                            <li class=""><a href="{{ url_for('blog.index') }}">{{_('Home')}}</a></li>
-                            {% if g.user %}
-                            <li class=""><a href="{{ url_for('recommender.recommended')}}">{{_('Recommended')}}</a></li>
-                            <li class=""><a href="{{ url_for('blog.rated') }}">{{_('Rated')}}</a></li>
-                            <li><a href="{{ url_for('auth.logout') }}">{{_('Logout')}}</a></li>
+                    <ul class="uk-navbar-nav">
+                        <li class=""><a href="{{ url_for('blog.index') }}">{{_('Home')}}</a></li>
+                        {% if g.user %}
+                        <li class=""><a href="{{ url_for('recommender.recommended')}}">{{_('Recommended')}}</a></li>
+                        <li class=""><a href="{{ url_for('blog.rated') }}">{{_('Rated')}}</a></li>
+                        <li><a href="{{ url_for('auth.logout') }}">{{_('Logout')}}</a></li>
 
-                            {% else %}
-                            <li><a href="{{ url_for('auth.register') }}">{{_('Register')}}</a></li>
-                            <li><a href="{{ url_for('auth.login') }}">{{_('Login')}}</a></li>
-                            {% endif %}
-                            <li>
-                                <a href="#">{{_('Language')}}</a>
-                                <div class="uk-navbar-dropdown">
-                                    <ul class="uk-nav uk-navbar-dropdown-nav">
-                                        <li class=""><a href="{{url_for('language.language', lang = 'en')}}">{{_('English')}}</a></li>
-                                        <li><a href="{{url_for('language.language', lang = 'ja')}}">{{_('Japanese')}}</a></li>
-                                        <li><a href="{{url_for('language.language', lang = 'es')}}"">{{_('Spanish')}}</a></li>
+                        {% else %}
+                        <li><a href="{{ url_for('auth.register') }}">{{_('Register')}}</a></li>
+                        <li><a href="{{ url_for('auth.login') }}">{{_('Login')}}</a></li>
+                        {% endif %}
+                        <li>
+                            <a href="#">{{_('Language')}}</a>
+                            <div class="uk-navbar-dropdown">
+                                <ul class="uk-nav uk-navbar-dropdown-nav">
+                                    <li class=""><a
+                                            href="{{url_for('language.language', lang = 'en')}}">{{_('English')}}</a>
+                                    </li>
+                                    <li><a href="{{url_for('language.language', lang = 'ja')}}">{{_('Japanese')}}</a>
+                                    </li>
+                                    <li><a href="{{url_for('language.language', lang = 'es')}}"">{{_('Spanish')}}</a></li>
                                     </ul>
                                 </div>
                             </li>
                              {% if g.user %}
-                            <li class = "uk-position-top-left">{{ g.user['username'] }}</li>
-                            {% endif %}
-                        </ul>
-                    </div>
-                    <div class="uk-navbar-right">
-                        <div>
-                            <a class="uk-navbar-toggle" uk-search-icon href="#"></a>
-                            <div class="uk-drop" uk-drop="mode: click; pos: left-center; offset: 0">
+                            <li class = " uk-position-top-left">{{ g.user['username'] }}</li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                            <div class="uk-navbar-right">
                                 <form action="{{ url_for('blog.search') }}" method="POST" class="uk-search uk-search-navbar uk-width-1-1">
-                                    <input type="text" class="uk-search-input" type="search" placeholder="Search" name="movie_name">
+                                    <a class="uk-search-icon-flip" uk-search-icon href="#"></a>
+                                    <input autocomplete="off" type="text" class="uk-search-input" type="search" placeholder="Search" name="movie_name">
+                                    <div uk-dropdown="mode: click; pos: bottom-justify; boundary: .uk-search; boundary-align: true ">
+                                        <ul class="uk-nav uk-dropdown-nav">
+                                            <li class="uk-nav-header">Genres</li>
+                                            <ul style="width:50%; float:left;">
+                                                <li><input class="uk-checkbox" type="checkbox"> Action</li>
+                                                <li><input class="uk-checkbox" type="checkbox"> Adventure</li>
+                                                <li><input class="uk-checkbox" type="checkbox"> Animation</li>
+                                                <li><input class="uk-checkbox" type="checkbox"> Children</li>
+                                                <li><input class="uk-checkbox" type="checkbox"> Crime</li>
+                                                <li><input class="uk-checkbox" type="checkbox"> Documentary</li>
+                                                <li><input class="uk-checkbox" type="checkbox"> Drama</li>
+                                                <li><input class="uk-checkbox" type="checkbox"> Fantasy</li>
+                                                <li><input class="uk-checkbox" type="checkbox"> Film-Noir</li>
+                                            </ul>
+                                            <ul style="width:50%; float:left;">
+                                                <li><input class="uk-checkbox" type="checkbox"> Horror</li>
+                                                <li><input class="uk-checkbox" type="checkbox"> IMAX</li>
+                                                <li><input class="uk-checkbox" type="checkbox"> Musical</li>
+                                                <li><input class="uk-checkbox" type="checkbox"> Mystery</li>
+                                                <li><input class="uk-checkbox" type="checkbox"> Romance</li>
+                                                <li><input class="uk-checkbox" type="checkbox"> Sci-Fi</li>
+                                                <li><input class="uk-checkbox" type="checkbox"> Thriller</li>
+                                                <li><input class="uk-checkbox" type="checkbox"> War</li>
+                                                <li><input class="uk-checkbox" type="checkbox"> Western</li>
+                                            </ul>
+                                        </ul>
+                                    </div>
                                 </form>
                             </div>
-                    </div>
-                </nav>
-            </div>
-        </div>
-        <div class="Movies">
-            <header>{% block header %}{% endblock %}</header>
-            <!-- shows error messages and this code displays them -->
-            {% for message in get_flashed_messages() %}
-              <div class="flash">{{ message }}</div>
-            {% endfor %}
-            {% block content %}{% endblock %}
+                </div>
+                <div class="Movies">
+                    <header>{% block header %}{% endblock %}</header>
+                    <!-- shows error messages and this code displays them -->
+                    {% for message in get_flashed_messages() %}
+                    <div class="flash">{{ message }}</div>
+                    {% endfor %}
+                    {% block content %}{% endblock %}
 
 
-            <!-- Main Header potentially on every page -->
-            <!-- <h3 class = "uk-text-center uk-light">Hello Caleb,<br/>Here are your movie recommendations for today:</h3> -->
-<!--
+                    <!-- Main Header potentially on every page -->
+                    <!-- <h3 class = "uk-text-center uk-light">Hello Caleb,<br/>Here are your movie recommendations for today:</h3> -->
+                    <!--
             The grid for the Movies to go into for browse and all
             <div class="uk-child-width-1-2 uk-child-width-1-4@s uk-child-width-1-5@m uk-text-center uk-grid-small uk-grid-match" uk-grid uk-height-match="target: > div > .uk-card > .uk-card-body" >
 
@@ -106,10 +134,11 @@
 
 
 
-            <div class="Footer"></div>
-        </div>
+                    <div class="Footer"></div>
+                </div>
 
-    <script src="{{ url_for
+                <script src="{{ url_for
     ('static', filename = 'main.js')}}"></script>
 </body>
+
 </html>
