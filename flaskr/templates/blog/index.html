@@ -20,7 +20,11 @@
     <div>
         <div class="uk-card uk-card-default">
             <div class="uk-card-media-top">
-                <img src="{{movie['poster']}}" alt="https://lascrucesfilmfest.com/wp-content/uploads/2018/01/no-poster-available.jpg">
+                {% if movie['poster'] == 'Not_found' %}
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/64/Poster_not_available.jpg">
+                {% else %}
+                <img src="{{movie['poster']}}">
+                {% endif %}
             </div>
             <div class="uk-card-body">
                 <h3 class="uk-card-title">{{movie['title']}}</h3>
@@ -71,12 +75,14 @@
     {% endfor %}
 </div>
 
- <div>
+<ul class="uk-pagination uk-margin-auto">
     {% if page > 1%}
-    <a href="{{url_for('index', page= page - 1 )}}"> {{_('Previous Page')}} </a>
+    <li class="uk-margin-auto-left"><a href="{{url_for('blog.search', page= page - 1, movie_name=movie_name, genre=genre)}}"><span class="uk-margin-small-right" uk-pagination-previous></span>Previous</a></li>
+    {% else %}
+    <li class="uk-margin-auto-left"><a href="#"><span class="uk-margin-small-right" uk-pagination-previous></span>Previous</a></li>
     {% endif %}
-    <a href="{{url_for('index', page= page + 1 )}}"> {{_('Next Page')}} </a>
-  </div>
+    <li class="uk-margin-auto-right"><a href="{{url_for('blog.search', page= page + 1, movie_name=movie_name, genre=genre)}}">Next<span class="uk-margin-small-left" uk-pagination-next></span></a></li>
+</ul>
 
 
 {% endblock %}

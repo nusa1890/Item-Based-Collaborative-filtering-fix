@@ -67,33 +67,33 @@
                                 </ul>
                             </div>
                             <div class="uk-navbar-right">
-                                <form action="{{ url_for('blog.search') }}" method="POST" class="uk-search uk-search-navbar uk-width-1-1">
+                                <form action="{{ url_for('blog.search') }}" method="GET" class="uk-search uk-search-navbar uk-width-1-1">
                                     <a class="uk-search-icon-flip" uk-search-icon href="#"></a>
                                     <input autocomplete="off" type="text" class="uk-search-input" type="search" placeholder="Search" name="movie_name">
                                     <div uk-dropdown="mode: click; pos: bottom-justify; boundary: .uk-search; boundary-align: true ">
                                         <ul class="uk-nav uk-dropdown-nav">
                                             <li class="uk-nav-header">Genres</li>
                                             <ul style="width:50%; float:left;">
-                                                <li><input class="uk-checkbox" type="checkbox"> Action</li>
-                                                <li><input class="uk-checkbox" type="checkbox"> Adventure</li>
-                                                <li><input class="uk-checkbox" type="checkbox"> Animation</li>
-                                                <li><input class="uk-checkbox" type="checkbox"> Children</li>
-                                                <li><input class="uk-checkbox" type="checkbox"> Crime</li>
-                                                <li><input class="uk-checkbox" type="checkbox"> Documentary</li>
-                                                <li><input class="uk-checkbox" type="checkbox"> Drama</li>
-                                                <li><input class="uk-checkbox" type="checkbox"> Fantasy</li>
-                                                <li><input class="uk-checkbox" type="checkbox"> Film-Noir</li>
+                                                <li><input class="uk-checkbox" type="checkbox" value="Action" name="genre"> Action</li>
+                                                <li><input class="uk-checkbox" type="checkbox" value="Adventure" name="genre"> Adventure</li>
+                                                <li><input class="uk-checkbox" type="checkbox" value="Animation" name="genre"> Animation</li>
+                                                <li><input class="uk-checkbox" type="checkbox" value="Children" name="genre"> Children</li>
+                                                <li><input class="uk-checkbox" type="checkbox" value="Crime" name="genre"> Crime</li>
+                                                <li><input class="uk-checkbox" type="checkbox" value="Documentary" name="genre"> Documentary</li>
+                                                <li><input class="uk-checkbox" type="checkbox" value="Drama" name="genre"> Drama</li>
+                                                <li><input class="uk-checkbox" type="checkbox" value="Fantasy" name="genre"> Fantasy</li>
+                                                <li><input class="uk-checkbox" type="checkbox" value="Film-Noir" name="genre"> Film-Noir</li>
                                             </ul>
                                             <ul style="width:50%; float:left;">
-                                                <li><input class="uk-checkbox" type="checkbox"> Horror</li>
-                                                <li><input class="uk-checkbox" type="checkbox"> IMAX</li>
-                                                <li><input class="uk-checkbox" type="checkbox"> Musical</li>
-                                                <li><input class="uk-checkbox" type="checkbox"> Mystery</li>
-                                                <li><input class="uk-checkbox" type="checkbox"> Romance</li>
-                                                <li><input class="uk-checkbox" type="checkbox"> Sci-Fi</li>
-                                                <li><input class="uk-checkbox" type="checkbox"> Thriller</li>
-                                                <li><input class="uk-checkbox" type="checkbox"> War</li>
-                                                <li><input class="uk-checkbox" type="checkbox"> Western</li>
+                                                <li><input class="uk-checkbox" type="checkbox" value="Horror" name="genre"> Horror</li>
+                                                <li><input class="uk-checkbox" type="checkbox" value="IMAX" name="genre"> IMAX</li>
+                                                <li><input class="uk-checkbox" type="checkbox" value="Musical" name="genre"> Musical</li>
+                                                <li><input class="uk-checkbox" type="checkbox" value="Mystery" name="genre"> Mystery</li>
+                                                <li><input class="uk-checkbox" type="checkbox" value="Romance" name="genre"> Romance</li>
+                                                <li><input class="uk-checkbox" type="checkbox" value="Sci-Fi" name="genre"> Sci-Fi</li>
+                                                <li><input class="uk-checkbox" type="checkbox" value="Thriller" name="genre"> Thriller</li>
+                                                <li><input class="uk-checkbox" type="checkbox" value="War" name="genre"> War</li>
+                                                <li><input class="uk-checkbox" type="checkbox" value="Western" name="genre"> Western</li>
                                             </ul>
                                         </ul>
                                     </div>

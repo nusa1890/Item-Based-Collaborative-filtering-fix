@@ -48,37 +48,25 @@ def index():
 
     return render_template('blog/index.html', movies=movies, page = page)
 
-@bp.route("/search", methods=['GET','POST'])
+@bp.route("/search", methods=['GET'])
 def search():
-    if request.method == 'POST':
-        form = request.form
-        keyword = form['movie_name']
-        page = request.args.get('page', 1, type=int)
-        db = get_db()
-        movies=db.execute('SELECT * FROM movies WHERE title like ? '
-                        'LIMIT ? OFFSET ?',
-                        (("%"+keyword+"%"), '18', str((page - 1) * 18), )).fetchall()
-    else:
-        return redirect('/')
+    db = get_db()
+    page = request.args.get('page', 1, type=int)
+    query=['']
+    movie_name= request.args.getlist('movie_name')
+    genre= request.args.getlist('genre')
+    for item in movie_name:
+        query.append('SELECT * FROM movies WHERE title LIKE '+'"%'+item+'%"')
+        if not genre:
+            query="".join(query)
+        else:
+            for item in genre:
+                query.append(' AND genres LIKE '+'"%'+item+'%"')
+            query="".join(query)
 
-    return render_template('blog/index.html', movies=movies, page=page)
-
-@bp.route("/advanced_search", methods=['GET','POST'])
-def advanced_search():
-    if request.method == 'POST':
-        form = request.form
-        keyword = form['movie_name']
-        genre = form['genre']
-        year = form['year']
-        page = request.args.get('page', 1, type=int)
-        db = get_db()
-        movies=db.execute('SELECT * FROM movies WHERE title like ? '
-                        'LIMIT ? OFFSET ?',
-                        (("%"+keyword+"%"), '18', str((page - 1) * 18), )).fetchall()
-    else:
-        return redirect('/')
-
-    return render_template('blog/index.html', movies=movies, page=page)
+    movies=db.execute(query+' LIMIT ? OFFSET ?',('18', str((page - 1) * 18), )).fetchall()
+    #movies=db.execute('SELECT * FROM movies LIMIT ? OFFSET ?',('18', str((page - 1) * 18), )).fetchall()
+    return render_template('blog/index.html', movies=movies, page=page,movie_name=movie_name,genre=genre)
 
 # lists all of the films that the current user has already rated
 @bp.route('/rated')
