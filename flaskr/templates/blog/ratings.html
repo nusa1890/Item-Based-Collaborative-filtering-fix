@@ -26,7 +26,7 @@
             <div class="uk-card-footer uk-padding-remove">
               <div class="rate uk-text-large" id ="{{'rate' ~  rating['id']}}" data-rate-value={{rating['rating']}}></div>
               <form action="{{ url_for('blog.remove', id=rating['id']) }}" method="post">
-                <input class="danger" type="submit" value="Delete" onclick="return confirm('Are you sure?');">
+                <input class="uk-button uk-button-danger uk-button-small" type="submit" value="Delete" onclick="return confirm('Are you sure?');">
               </form>
 
               <script type="text/javascript">
@@ -71,13 +71,14 @@
     {% endfor %}
 </div>
 
-<div>
+<ul class="uk-pagination uk-margin-auto">
     {% if page > 1%}
-    <a href="{{url_for('blog.rated', page= page - 1 )}}"> {{_('Previous Page')}} </a>
+    <li class="uk-margin-auto-left"><a href="{{url_for('blog.rated', page= page - 1 )}}"><span class="uk-margin-small-right" uk-pagination-previous></span>Previous</a></li>
+    {% else %}
+    <li class="uk-margin-auto-left"><a href="#"><span class="uk-margin-small-right" uk-pagination-previous></span>Previous</a></li>
     {% endif %}
-    <a href="{{url_for('blog.rated', page= page + 1 )}}"> {{_('Next Page')}} </a>
-  </div>
-
+    <li class="uk-margin-auto-right"><a href="{{url_for('blog.rated', page= page + 1 )}}">Next<span class="uk-margin-small-left" uk-pagination-next></span></a></li>
+</ul>
 {% endblock %}
 
 

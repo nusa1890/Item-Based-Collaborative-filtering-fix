@@ -52,4 +52,6 @@ def recommend_movies(user):
         reccomendation.to_sql("rec"+str(user), db, if_exists='replace')
     except:
         reccomendation=movies
+    reccomendation.columns = ['title', 'genres', 'poster', 'pred_rating']
+    reccomendation=reccomendation.rename_axis('id')
     reccomendation.to_sql("rec"+str(user), db, if_exists='replace')

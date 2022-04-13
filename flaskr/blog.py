@@ -63,7 +63,6 @@ def search():
             for item in genre:
                 query.append(' AND genres LIKE '+'"%'+item+'%"')
             query="".join(query)
-
     movies=db.execute(query+' LIMIT ? OFFSET ?',('18', str((page - 1) * 18), )).fetchall()
     #movies=db.execute('SELECT * FROM movies LIMIT ? OFFSET ?',('18', str((page - 1) * 18), )).fetchall()
     return render_template('blog/index.html', movies=movies, page=page,movie_name=movie_name,genre=genre)

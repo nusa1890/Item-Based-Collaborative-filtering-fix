@@ -41,3 +41,24 @@ def recommended():
     return render_template(
         'recommender/recommender.html', movies=movies, page=page)
     # get the two movie sets from the data base
+
+@bp.route("/search_recommender", methods=['GET'])
+def search_recommender():
+    db = get_db()
+    page = request.args.get('page', 1, type=int)
+    query=['']
+    print(request.url_rule.endpoint)
+    movie_name= request.args.getlist('movie_name')
+    genre= request.args.getlist('genre')
+    for item in movie_name:
+        query.append('SELECT * FROM rec'+str(g.user['id'])+' WHERE title LIKE '+'"%'+item+'%"')
+        if not genre:
+            query="".join(query)
+        else:
+            for item in genre:
+                query.append(' AND genres LIKE '+'"%'+item+'%"')
+            query="".join(query)
+    print(query)
+    movies=db.execute(query+' LIMIT ? OFFSET ?',('18', str((page - 1) * 18), )).fetchall()
+    #movies=db.execute('SELECT * FROM movies LIMIT ? OFFSET ?',('18', str((page - 1) * 18), )).fetchall()
+    return render_template('blog/index.html', movies=movies, page=page,movie_name=movie_name,genre=genre)

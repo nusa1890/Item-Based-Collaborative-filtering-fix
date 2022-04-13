@@ -75,6 +75,16 @@
     {% endfor %}
 </div>
 
+{% if request.url_rule.endpoint=='recommender.recommended' or request.url_rule.endpoint=='recommender.search_recommender'%}
+<ul class="uk-pagination uk-margin-auto">
+    {% if page > 1%}
+    <li class="uk-margin-auto-left"><a href="{{url_for('recommender.search_recommender', page= page - 1, movie_name=movie_name, genre=genre)}}"><span class="uk-margin-small-right" uk-pagination-previous></span>Previous</a></li>
+    {% else %}
+    <li class="uk-margin-auto-left"><a href="#"><span class="uk-margin-small-right" uk-pagination-previous></span>Previous</a></li>
+    {% endif %}
+    <li class="uk-margin-auto-right"><a href="{{url_for('recommender.search_recommender', page= page + 1, movie_name=movie_name, genre=genre)}}">Next<span class="uk-margin-small-left" uk-pagination-next></span></a></li>
+</ul>
+{% else %}
 <ul class="uk-pagination uk-margin-auto">
     {% if page > 1%}
     <li class="uk-margin-auto-left"><a href="{{url_for('blog.search', page= page - 1, movie_name=movie_name, genre=genre)}}"><span class="uk-margin-small-right" uk-pagination-previous></span>Previous</a></li>
@@ -83,6 +93,8 @@
     {% endif %}
     <li class="uk-margin-auto-right"><a href="{{url_for('blog.search', page= page + 1, movie_name=movie_name, genre=genre)}}">Next<span class="uk-margin-small-left" uk-pagination-next></span></a></li>
 </ul>
+{% endif %}
+
 
 
 {% endblock %}

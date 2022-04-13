@@ -66,8 +66,13 @@
                                     {% endif %}
                                 </ul>
                             </div>
-                            <div class="uk-navbar-right">
-                                <form action="{{ url_for('blog.search') }}" method="GET" class="uk-search uk-search-navbar uk-width-1-1">
+
+                            <div class="uk-navbar-right uk-search uk-search-navbar uk-width-1-6">
+                                {% if request.url_rule.endpoint=='recommender.recommended' or request.url_rule.endpoint=='recommender.search_recommender'%}
+                                <form action="{{ url_for('recommender.search_recommender') }}" method="GET">
+                                {% else %}
+                                <form action="{{ url_for('blog.search') }}" method="GET">
+                                {% endif %}
                                     <a class="uk-search-icon-flip" uk-search-icon href="#"></a>
                                     <input autocomplete="off" type="text" class="uk-search-input" type="search" placeholder="Search" name="movie_name">
                                     <div uk-dropdown="mode: click; pos: bottom-justify; boundary: .uk-search; boundary-align: true ">

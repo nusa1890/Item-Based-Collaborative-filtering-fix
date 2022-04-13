@@ -23,7 +23,7 @@
                 </p>
             </div>
             <div class="uk-card-footer uk-padding-remove">
-              <div class="rate uk-text-large" id ="{{'movie' ~  movie['movieid']}}"></div>
+              <div class="rate uk-text-large" id ="{{'movie' ~  movie['id']}}"></div>
 
               <script type="text/javascript">
                 options = {
@@ -35,11 +35,11 @@
                   readonly: false,
                   change_once: false, // Determines if the rating can only be set once
                   ajax_method: 'POST',
-                  url: '{{ url_for('blog.add', id=movie['movieid']) }}', // change this when i have this working
+                  url: '{{ url_for('blog.add', id=movie['id']) }}', // change this when i have this working
                   additional_data: {}, // Additional data to send to the server
                   // update_input_field_name: $('#input2')
                   }
-                $("#{{'movie' ~ movie['movieid']}}").rate(options)
+                $("#{{'movie' ~ movie['id']}}").rate(options)
               </script>
 
             </div>
@@ -48,13 +48,15 @@
     {% endfor %}
 </div>
 
- <div>
-    {% if page > 1%}
-    <a href="{{url_for('recommender.recommended', page= page - 1 )}}"> {{_('Previous Page')}} </a>
-    {% endif %}
-    <a href="{{url_for('recommender.recommended', page= page + 1 )}}"> {{_('Next Page')}} </a>
-  </div>
 
+<ul class="uk-pagination uk-margin-auto">
+    {% if page > 1%}
+    <li class="uk-margin-auto-left"><a href="{{url_for('recommender.recommended', page= page - 1 )}}"><span class="uk-margin-small-right" uk-pagination-previous></span>Previous</a></li>
+    {% else %}
+    <li class="uk-margin-auto-left"><a href="#"><span class="uk-margin-small-right" uk-pagination-previous></span>Previous</a></li>
+    {% endif %}
+    <li class="uk-margin-auto-right"><a href="{{url_for('recommender.recommended', page= page + 1 )}}">Next<span class="uk-margin-small-left" uk-pagination-next></span></a></li>
+</ul>
 
 {% endblock %}
 
