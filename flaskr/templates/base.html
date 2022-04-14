@@ -28,10 +28,10 @@
 
 </head>
 
-<body class="uk-background-secondary">
+<body class="uk-background-muted">
     <div class="grid-container">
         <div class="Header">
-            <div class="uk-background-secondary"
+            <div class=".uk-background-muted"
                 uk-sticky="show-on-up: true; animation: uk-animation-slide-top; sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky; bottom: #scrollup-dropdown"
                 uk-navbar>
                 <!-- <img src="movie_logo.png" id = "logo"> -->
@@ -109,7 +109,11 @@
                     <header>{% block header %}{% endblock %}</header>
                     <!-- shows error messages and this code displays them -->
                     {% for message in get_flashed_messages() %}
-                    <div class="flash">{{ message }}</div>
+                    </div>
+                    <div style="margin-left: 25%;" class="uk-width-1-2 uk-alert-danger uk-animation-shake" uk-alert>
+                        <a class="uk-alert-close" uk-close></a>
+                        <p class="uk-text-center">{{ message }}</p>
+                    </div>
                     {% endfor %}
                     {% block content %}{% endblock %}
 
