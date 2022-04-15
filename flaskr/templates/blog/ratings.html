@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h3 class = "uk-text-center uk-light">{{_('Here are the films you have already')}} {% block title %} {{_('rated')}} {% endblock %}</h3>
+  <h3 class = "uk-text-center uk-dark">{{_('Here are the films you have already')}} {% block title %} {{_('rated')}} {% endblock %}</h3>
 {% endblock %}
 
 {% block content %}
@@ -41,7 +41,6 @@
                   ajax_method: 'POST',
                   url: '{{ url_for('blog.update', id=rating['id']) }}', // change this when i have this working
                   additional_data: {}, // Additional data to send to the server
-                  // update_input_field_name: $('#input2')
                   }
                 $("#{{'rate' ~ rating['id']}}").rate(options)
               </script>

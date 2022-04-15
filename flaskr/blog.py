@@ -45,7 +45,6 @@ def index():
             'SELECT * '
             'FROM movies LIMIT ? OFFSET ?', ('18', str((page - 1) * 18), )).fetchall()
 
-
     return render_template('blog/index.html', movies=movies, page = page)
 
 @bp.route("/search", methods=['GET'])
@@ -86,6 +85,9 @@ def rated():
         'and m.id = r.movieID '
         'LIMIT ? OFFSET ?',
         (g.user['id'], '18', str((page - 1) * 18), )).fetchall()
+    
+    if len(ratings) < 15:
+        flash("Please rate atleast "+str(15-len(ratings))+" movies to get personalized reccomendation")
 
     return render_template('blog/ratings.html', ratings=ratings, page=page)
 
@@ -130,6 +132,3 @@ def add(id):
     db.commit()
     print(url_for('index'))
     return redirect(url_for('index'))
-
-
-

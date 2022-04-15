@@ -68,59 +68,80 @@
                             </div>
 
                             <div class="uk-navbar-right uk-search uk-search-navbar uk-width-1-6">
-                                {% if request.url_rule.endpoint=='recommender.recommended' or request.url_rule.endpoint=='recommender.search_recommender'%}
+                                {% if request.url_rule.endpoint=='recommender.recommended' or
+                                request.url_rule.endpoint=='recommender.search_recommender'%}
                                 <form action="{{ url_for('recommender.search_recommender') }}" method="GET">
-                                {% else %}
-                                <form action="{{ url_for('blog.search') }}" method="GET">
-                                {% endif %}
-                                    <a class="uk-search-icon-flip" uk-search-icon href="#"></a>
-                                    <input autocomplete="off" type="text" class="uk-search-input" type="search" placeholder="Search" name="movie_name">
-                                    <div uk-dropdown="mode: click; pos: bottom-justify; boundary: .uk-search; boundary-align: true ">
-                                        <ul class="uk-nav uk-dropdown-nav">
-                                            <li class="uk-nav-header">Genres</li>
-                                            <ul style="width:50%; float:left;">
-                                                <li><input class="uk-checkbox" type="checkbox" value="Action" name="genre"> Action</li>
-                                                <li><input class="uk-checkbox" type="checkbox" value="Adventure" name="genre"> Adventure</li>
-                                                <li><input class="uk-checkbox" type="checkbox" value="Animation" name="genre"> Animation</li>
-                                                <li><input class="uk-checkbox" type="checkbox" value="Children" name="genre"> Children</li>
-                                                <li><input class="uk-checkbox" type="checkbox" value="Crime" name="genre"> Crime</li>
-                                                <li><input class="uk-checkbox" type="checkbox" value="Documentary" name="genre"> Documentary</li>
-                                                <li><input class="uk-checkbox" type="checkbox" value="Drama" name="genre"> Drama</li>
-                                                <li><input class="uk-checkbox" type="checkbox" value="Fantasy" name="genre"> Fantasy</li>
-                                                <li><input class="uk-checkbox" type="checkbox" value="Film-Noir" name="genre"> Film-Noir</li>
+                                    {% else %}
+                                    <form action="{{ url_for('blog.search') }}" method="GET">
+                                        {% endif %}
+                                        <a class="uk-search-icon-flip" uk-search-icon href="#"></a>
+                                        <input autocomplete="off" type="text" class="uk-search-input" type="search"
+                                            placeholder="Search" name="movie_name">
+                                        <div
+                                            uk-dropdown="mode: click; pos: bottom-justify; boundary: .uk-search; boundary-align: true ">
+                                            <ul class="uk-nav uk-dropdown-nav">
+                                                <li class="uk-nav-header">Genres</li>
+                                                <ul style="width:50%; float:left;">
+                                                    <li><input class="uk-checkbox" type="checkbox" value="Action"
+                                                            name="genre"> Action</li>
+                                                    <li><input class="uk-checkbox" type="checkbox" value="Adventure"
+                                                            name="genre"> Adventure</li>
+                                                    <li><input class="uk-checkbox" type="checkbox" value="Animation"
+                                                            name="genre"> Animation</li>
+                                                    <li><input class="uk-checkbox" type="checkbox" value="Children"
+                                                            name="genre"> Children</li>
+                                                    <li><input class="uk-checkbox" type="checkbox" value="Crime"
+                                                            name="genre"> Crime</li>
+                                                    <li><input class="uk-checkbox" type="checkbox" value="Documentary"
+                                                            name="genre"> Documentary</li>
+                                                    <li><input class="uk-checkbox" type="checkbox" value="Drama"
+                                                            name="genre"> Drama</li>
+                                                    <li><input class="uk-checkbox" type="checkbox" value="Fantasy"
+                                                            name="genre"> Fantasy</li>
+                                                    <li><input class="uk-checkbox" type="checkbox" value="Film-Noir"
+                                                            name="genre"> Film-Noir</li>
+                                                </ul>
+                                                <ul style="width:50%; float:left;">
+                                                    <li><input class="uk-checkbox" type="checkbox" value="Horror"
+                                                            name="genre"> Horror</li>
+                                                    <li><input class="uk-checkbox" type="checkbox" value="IMAX"
+                                                            name="genre"> IMAX</li>
+                                                    <li><input class="uk-checkbox" type="checkbox" value="Musical"
+                                                            name="genre"> Musical</li>
+                                                    <li><input class="uk-checkbox" type="checkbox" value="Mystery"
+                                                            name="genre"> Mystery</li>
+                                                    <li><input class="uk-checkbox" type="checkbox" value="Romance"
+                                                            name="genre"> Romance</li>
+                                                    <li><input class="uk-checkbox" type="checkbox" value="Sci-Fi"
+                                                            name="genre"> Sci-Fi</li>
+                                                    <li><input class="uk-checkbox" type="checkbox" value="Thriller"
+                                                            name="genre"> Thriller</li>
+                                                    <li><input class="uk-checkbox" type="checkbox" value="War"
+                                                            name="genre"> War</li>
+                                                    <li><input class="uk-checkbox" type="checkbox" value="Western"
+                                                            name="genre"> Western</li>
+                                                </ul>
                                             </ul>
-                                            <ul style="width:50%; float:left;">
-                                                <li><input class="uk-checkbox" type="checkbox" value="Horror" name="genre"> Horror</li>
-                                                <li><input class="uk-checkbox" type="checkbox" value="IMAX" name="genre"> IMAX</li>
-                                                <li><input class="uk-checkbox" type="checkbox" value="Musical" name="genre"> Musical</li>
-                                                <li><input class="uk-checkbox" type="checkbox" value="Mystery" name="genre"> Mystery</li>
-                                                <li><input class="uk-checkbox" type="checkbox" value="Romance" name="genre"> Romance</li>
-                                                <li><input class="uk-checkbox" type="checkbox" value="Sci-Fi" name="genre"> Sci-Fi</li>
-                                                <li><input class="uk-checkbox" type="checkbox" value="Thriller" name="genre"> Thriller</li>
-                                                <li><input class="uk-checkbox" type="checkbox" value="War" name="genre"> War</li>
-                                                <li><input class="uk-checkbox" type="checkbox" value="Western" name="genre"> Western</li>
-                                            </ul>
-                                        </ul>
-                                    </div>
-                                </form>
+                                        </div>
+                                    </form>
                             </div>
                 </div>
                 <div class="Movies">
                     <header>{% block header %}{% endblock %}</header>
                     <!-- shows error messages and this code displays them -->
                     {% for message in get_flashed_messages() %}
-                    </div>
-                    <div style="margin-left: 25%;" class="uk-width-1-2 uk-alert-danger uk-animation-shake" uk-alert>
-                        <a class="uk-alert-close" uk-close></a>
-                        <p class="uk-text-center">{{ message }}</p>
-                    </div>
-                    {% endfor %}
-                    {% block content %}{% endblock %}
+                </div>
+                <div style="margin-left: 25%;" class="uk-width-1-2 uk-alert-danger uk-animation-shake" uk-alert>
+                    <a class="uk-alert-close" uk-close></a>
+                    <p class="uk-text-center">{{ message }}</p>
+                </div>
+                {% endfor %}
+                {% block content %}{% endblock %}
 
 
-                    <!-- Main Header potentially on every page -->
-                    <!-- <h3 class = "uk-text-center uk-light">Hello Caleb,<br/>Here are your movie recommendations for today:</h3> -->
-                    <!--
+                <!-- Main Header potentially on every page -->
+                <!-- <h3 class = "uk-text-center uk-light">Hello Caleb,<br/>Here are your movie recommendations for today:</h3> -->
+                <!--
             The grid for the Movies to go into for browse and all
             <div class="uk-child-width-1-2 uk-child-width-1-4@s uk-child-width-1-5@m uk-text-center uk-grid-small uk-grid-match" uk-grid uk-height-match="target: > div > .uk-card > .uk-card-body" >
 
@@ -143,10 +164,10 @@
 
 
 
-                    <div class="Footer"></div>
-                </div>
+                <div class="Footer"></div>
+            </div>
 
-                <script src="{{ url_for
+            <script src="{{ url_for
     ('static', filename = 'main.js')}}"></script>
 </body>
 

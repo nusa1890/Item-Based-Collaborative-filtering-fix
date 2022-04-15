@@ -5,3 +5,5 @@ pandas
 numpy
 requests
 jinja2
+matplotlib
+scikit-learn
