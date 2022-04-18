@@ -35,21 +35,21 @@
                 uk-sticky="show-on-up: true; animation: uk-animation-slide-top; sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky; bottom: #scrollup-dropdown"
                 uk-navbar>
                 <!-- <img src="movie_logo.png" id = "logo"> -->
-                <div class="uk-navbar-left">
+                <div class="uk-navbar-left ">
 
                     <ul class="uk-navbar-nav">
-                        <li class=""><a href="{{ url_for('blog.index') }}">{{_('Home')}}</a></li>
+                        <li><a id="myNavbar" href="{{ url_for('blog.index') }}">{{_('Home')}}</a></li>
                         {% if g.user %}
-                        <li class=""><a href="{{ url_for('recommender.recommended')}}">{{_('Recommended')}}</a></li>
-                        <li class=""><a href="{{ url_for('blog.rated') }}">{{_('Rated')}}</a></li>
-                        <li><a href="{{ url_for('auth.logout') }}">{{_('Logout')}}</a></li>
+                        <li><a id="myNavbar" href="{{ url_for('recommender.recommended')}}">{{_('Recommended')}}</a></li>
+                        <li><a id="myNavbar" href="{{ url_for('blog.rated') }}">{{_('Rated')}}</a></li>
+                        <li><a id="myNavbar" href="{{ url_for('auth.logout') }}">{{_('Logout')}}</a></li>
 
                         {% else %}
-                        <li><a href="{{ url_for('auth.register') }}">{{_('Register')}}</a></li>
-                        <li><a href="{{ url_for('auth.login') }}">{{_('Login')}}</a></li>
+                        <li><a id="myNavbar" href="{{ url_for('auth.register') }}">{{_('Register')}}</a></li>
+                        <li><a id="myNavbar" href="{{ url_for('auth.login') }}">{{_('Login')}}</a></li>
                         {% endif %}
                              {% if g.user %}
-                            <li class = " uk-position-top-left">{{ g.user['username'] }}</li>
+                            <li class = " uk-position-top-left">User : {{ g.user['username'] }}</li>
                                     {% endif %}
                                 </ul>
                             </div>

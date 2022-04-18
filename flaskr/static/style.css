@@ -52,3 +52,9 @@ body {
 .rate {
   margin: auto;
 }
+
+#myNavbar {
+    font-size: 20px;
+    /*font-weight: bold;*/
+    color: rgb(112, 112, 112);
+}
