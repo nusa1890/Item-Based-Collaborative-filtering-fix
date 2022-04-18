@@ -4,11 +4,11 @@
 
 
   {% if g.user %}
-  <h3 class = "uk-text-center uk-dark">{{_('Hi')}} {{ g.user['username'] }}! {{_('Watched a movie recently? Rate it below')}}:</h3>
+  <h3 class = "uk-text-center uk-dark">{{_('Halo')}} {{ g.user['username'] }}! {{_('Silahkan berikan rating pada film yang telah anda tonton untuk mendapatkan Rekomendasi')}}:</h3>
   <!-- change this to go to recommendation? -->
   <!-- If the user is logged in -->
   {% else %}
-  <h3 class = "uk-text-center uk-dark">{{_('Hi')}}! {{_('Watched a')}} {% block title %}{{_('movie')}}{% endblock %} {{_(recently)}}? {{_('Register')}}/{{_('Log in and start rating')}}:</h3>
+  <h3 class = "uk-text-center uk-dark">Halo!, silahkan Login atau Register untuk mulai memberikan rating</h3>
   {% endif %}
 {% endblock %}
 

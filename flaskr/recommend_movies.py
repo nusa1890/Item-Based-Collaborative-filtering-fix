@@ -52,7 +52,7 @@ def recommend_movies(user):
         rated=X[userId].loc[X[userId]>0]
         #buat pivot table dengan menggunakan movieId yang sudah dirating sebagai kolom dan movieId yang belum dirating sebagai index
         r_ur_corr_matt=corr_mat[rated.index].loc[unrated.index]\
-                    .apply(lambda x: x.nlargest(5), axis=1).fillna(0)#cari nilai similarity pada 10 item yang sudah 
+                    .apply(lambda x: x.nlargest(5), axis=1).fillna(0)#cari nilai similarity pada 5 item yang sudah 
         simlilarity_dot_weight=r_ur_corr_matt.apply(lambda x: sum(x*rated), axis=1)
         simlilarity_sum=r_ur_corr_matt.apply(np.sum, axis=1)
         pred=(simlilarity_dot_weight/simlilarity_sum).sort_values(ascending=False)

@@ -48,19 +48,6 @@
                         <li><a href="{{ url_for('auth.register') }}">{{_('Register')}}</a></li>
                         <li><a href="{{ url_for('auth.login') }}">{{_('Login')}}</a></li>
                         {% endif %}
-                        <li>
-                            <a href="#">{{_('Language')}}</a>
-                            <div class="uk-navbar-dropdown">
-                                <ul class="uk-nav uk-navbar-dropdown-nav">
-                                    <li class=""><a
-                                            href="{{url_for('language.language', lang = 'en')}}">{{_('English')}}</a>
-                                    </li>
-                                    <li><a href="{{url_for('language.language', lang = 'ja')}}">{{_('Japanese')}}</a>
-                                    </li>
-                                    <li><a href="{{url_for('language.language', lang = 'es')}}"">{{_('Spanish')}}</a></li>
-                                    </ul>
-                                </div>
-                            </li>
                              {% if g.user %}
                             <li class = " uk-position-top-left">{{ g.user['username'] }}</li>
                                     {% endif %}

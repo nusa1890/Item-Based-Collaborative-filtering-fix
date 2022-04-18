@@ -86,7 +86,7 @@ def rated():
         'LIMIT ? OFFSET ?',
         (g.user['id'], '18', str((page - 1) * 18), )).fetchall()
     
-    if len(ratings) < 15:
+    if len(ratings) < 15 and page==1:
         flash("Please rate atleast "+str(15-len(ratings))+" movies to get personalized reccomendation")
 
     return render_template('blog/ratings.html', ratings=ratings, page=page)
