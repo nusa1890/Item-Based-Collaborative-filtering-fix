@@ -23,7 +23,7 @@ def recommend_movies(user):
     ratings.columns = ['USERID', 'MOVIEID', 'RATING']
     #Ambil data movies dari sqlite dengan querry "SELECT * FROM review" dan simpan ke pandas dataframe
     movies = pd.read_sql_query('SELECT * FROM movies', db)
-    movies.columns = ['MOVIEID', 'TITLE', 'GENRES', 'POSTER']
+    movies.columns = ['MOVIEID', 'TITLE', 'GENRES', 'POSTER', 'LINK']
 
     num_rated = len(db.execute(
         'SELECT m.id, m.title, m.genres, m.poster, r.rating '
@@ -57,11 +57,11 @@ def recommend_movies(user):
         simlilarity_sum=r_ur_corr_matt.apply(np.sum, axis=1)
         pred=(simlilarity_dot_weight/simlilarity_sum).sort_values(ascending=False)
         reccomendation=pd.concat([movies.set_index('MOVIEID'), pred], axis=1).sort_values(by=0, ascending=False)
-        reccomendation.columns = ['title', 'genres', 'poster', 'pred_rating']
+        reccomendation.columns = ['title', 'genres', 'poster', 'link', 'pred_rating']
         reccomendation=reccomendation.rename_axis('id')
     except:
         reccomendation=movies
-        reccomendation.columns = ['id', 'title', 'genres', 'poster']
+        reccomendation.columns = ['id', 'title', 'genres', 'poster', 'link']
     if num_rated < 15:
         flash("Please rate atleast "+str(15-num_rated)+" movies to get personalized reccomendation")
     reccomendation.to_sql("rec"+str(user), db, if_exists='replace')

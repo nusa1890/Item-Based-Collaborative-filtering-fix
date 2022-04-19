@@ -25,10 +25,10 @@ def index():
     if g.user:
         movies = db.execute(
             # get all of the movies they haven't rated
-            'SELECT id, title, genres, poster '
+            'SELECT id, title, genres, poster, link '
             'FROM movies '
             'EXCEPT '
-            'SELECT m.id, m.title, m.genres, m.poster '
+            'SELECT m.id, m.title, m.genres, m.poster, m.link '
             'FROM movies m '
             'INNER JOIN '
             'ratings r '
@@ -77,7 +77,7 @@ def rated():
 
     db = get_db()
     ratings = db.execute(
-        'SELECT m.id, m.title, m.genres, m.poster, r.rating '
+        'SELECT m.id, m.title, m.genres, m.poster, m.link, r.rating '
         'FROM movies m '
         'INNER JOIN '
         'ratings r '

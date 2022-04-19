@@ -12,7 +12,15 @@
     <div>
         <div class="uk-card uk-card-default">
             <div class="uk-card-media-top">
-                <img src="{{movie['poster']}}" alt="https://lascrucesfilmfest.com/wp-content/uploads/2018/01/no-poster-available.jpg">
+              {% if movie['poster'] == 'Not_found' %}
+              <a href= {{ movie['link'] }} >
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/64/Poster_not_available.jpg">
+              </a>
+              {% else %}
+              <a href= {{ movie['link'] }} >
+                  <img src="{{movie['poster']}}">
+              </a>
+              {% endif %}
             </div>
             <div class="uk-car-body">
                 <h3 class="uk-card-title">{{movie['title']}}</h3>
