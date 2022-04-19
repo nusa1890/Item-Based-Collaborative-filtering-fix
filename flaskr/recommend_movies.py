@@ -15,7 +15,7 @@ bp = Blueprint('recommender', __name__)
 # recommends movies for any user
 # returns the movies with the highest predicted rating that the
 # specified user hasn't already rated
-# though i didnt user any explicit movie content features
+# though user didnt specify any explicit movie content features, only based on rating given previously
 def recommend_movies(user):
     db = get_db()
     #Ambil data ratings dari sqlite dengan querry "SELECT * FROM review" dan simpan ke pandas dataframe
