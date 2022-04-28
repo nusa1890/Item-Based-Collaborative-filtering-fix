@@ -22,22 +22,26 @@ def register():
 
         if not username:
             error = 'Username is required.'
+            flash(error,'error')
         elif not password:
             error = 'Password is required.'
+            flash(error,'error')
         elif db.execute(
             'SELECT id FROM users WHERE username = ?', (username,)
         ).fetchone() is not None:
             error = 'User {} is already registered.'.format(username)
+            flash(error,'error')
 
         if error is None:
             db.execute(
                 'INSERT INTO users (username, password) VALUES (?, ?)',
                 (username, generate_password_hash(password))
             )
+            error = 'User {} is successfully registered.'.format(username)
             db.commit()
+            flash(error,'success')
             return redirect(url_for('auth.login'))
 
-        flash(error)
 
     return render_template('auth/register.html')
 
@@ -54,17 +58,16 @@ def login():
 
         if user is None:
             error = 'Incorrect username.'
-            
+            flash(error,'error')
         elif not check_password_hash(user['password'], password):
             error = 'Incorrect password.'
-
+            flash(error,'error')
         if error is None:
             session.clear()
             session['user_id'] = user['id']
             recommend_movies(user['id'])
             return redirect(url_for('index'))
 
-        flash(error)
 
     return render_template('auth/login.html')
 

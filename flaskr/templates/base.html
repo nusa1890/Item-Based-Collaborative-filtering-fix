@@ -116,7 +116,14 @@
                 <div class="Movies">
                     <header>{% block header %}{% endblock %}</header>
                     <!-- shows error messages and this code displays them -->
-                    {% for message in get_flashed_messages() %}
+                {% for message in get_flashed_messages(category_filter=["success"]) %}
+                </div>
+                <div style="margin-left: 25%;" class="uk-width-1-2 uk-alert-success uk-animation-fade" uk-alert>
+                    <a class="uk-alert-close" uk-close></a>
+                    <p class="uk-text-center">{{ message }}</p>
+                </div>
+                {% endfor %}
+                {% for message in get_flashed_messages(category_filter=["error"]) %}
                 </div>
                 <div style="margin-left: 25%;" class="uk-width-1-2 uk-alert-danger uk-animation-shake" uk-alert>
                     <a class="uk-alert-close" uk-close></a>

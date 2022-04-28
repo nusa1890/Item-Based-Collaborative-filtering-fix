@@ -63,5 +63,5 @@ def recommend_movies(user):
         reccomendation=movies
         reccomendation.columns = ['id', 'title', 'genres', 'poster', 'link']
     if num_rated < 15:
-        flash("Please rate atleast "+str(15-num_rated)+" movies to get personalized reccomendation")
+        flash("Please rate atleast "+str(15-num_rated)+" movies to get personalized reccomendation","error")
     reccomendation.to_sql("rec"+str(user), db, if_exists='replace')
