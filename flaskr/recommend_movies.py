@@ -5,13 +5,21 @@ from sklearn.decomposition import TruncatedSVD
 from flaskr.db import get_db
 
 from scipy.sparse.linalg import svds
-
+import sqlite3
 import pandas as pd
 import numpy as np
 import requests
 
 bp = Blueprint('recommender', __name__)
 
+def top_similarity(df):    
+    N = 5
+    #https://stackoverflow.com/a/61518029/2901002
+    idx = np.argsort(-df.to_numpy(), kind='mergesort')[:,:N]
+    mask = np.zeros(df.shape, dtype=bool)
+    np.put_along_axis(mask, idx, True, axis=-1)
+    df = df.where(mask, 0)
+    return df
 # recommends movies for any user
 # returns the movies with the highest predicted rating that the
 # specified user hasn't already rated
@@ -45,18 +53,17 @@ def recommend_movies(user):
     #cari korelasi antar film menggunakan pearson correlation menggunakan fungsi corrcoef pada library numpy
     corr_mat = np.corrcoef(resultant_matrix)
     corr_mat = pd.DataFrame(corr_mat, columns = rating_crosstab.columns.tolist(), index = rating_crosstab.columns.tolist())
-    #cari data user yang akan diberi rekomendasi berdasarkan rating film tertinggi yang diberikan 
-    try:
+    #cari data user yang akan diberi rekomendasi berdasarkan rating film tertinggi yang diberikan
+    try: 
         userId = user
         unrated=X[userId].loc[X[userId]==0]
         rated=X[userId].loc[X[userId]>0]
         #buat pivot table dengan menggunakan movieId yang sudah dirating sebagai kolom dan movieId yang belum dirating sebagai index
-        r_ur_corr_matt=corr_mat[rated.index].loc[unrated.index]\
-                    .apply(lambda x: x.nlargest(5), axis=1).fillna(0)#cari nilai similarity pada 5 item yang sudah 
-        simlilarity_dot_weight=r_ur_corr_matt.apply(lambda x: sum(x*rated), axis=1)
-        simlilarity_sum=r_ur_corr_matt.apply(np.sum, axis=1)
-        pred=(simlilarity_dot_weight/simlilarity_sum).sort_values(ascending=False)
-        reccomendation=pd.concat([movies.set_index('MOVIEID'), pred], axis=1).sort_values(by=0, ascending=False)
+        r_ur_corr_matt=top_similarity(corr_mat[rated.index].loc[unrated.index])
+        simlilarity_dot_weight=np.sum(r_ur_corr_matt.to_numpy() * rated.to_numpy(),axis=1)
+        simlilarity_sum=np.sum(r_ur_corr_matt.to_numpy(),axis=1)
+        pred=pd.DataFrame(simlilarity_dot_weight/simlilarity_sum,columns=['pred_rating'],index=unrated.index).sort_values(ascending=False,by=['pred_rating'])
+        reccomendation=pd.concat([movies.set_index('MOVIEID'), pred], axis=1).sort_values(by=['pred_rating'], ascending=False)
         reccomendation.columns = ['title', 'genres', 'poster', 'link', 'pred_rating']
         reccomendation=reccomendation.rename_axis('id')
     except:

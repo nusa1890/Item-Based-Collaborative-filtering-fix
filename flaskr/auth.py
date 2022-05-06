@@ -1,7 +1,5 @@
 import functools
 
-from flaskr.recommend_movies import recommend_movies
-
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, session, url_for
 )
@@ -65,7 +63,6 @@ def login():
         if error is None:
             session.clear()
             session['user_id'] = user['id']
-            recommend_movies(user['id'])
             return redirect(url_for('index'))
 
 

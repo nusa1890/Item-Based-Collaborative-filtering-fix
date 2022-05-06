@@ -59,11 +59,11 @@
 
 <ul class="uk-pagination uk-margin-auto">
     {% if page > 1%}
-    <li class="uk-margin-auto-left"><a href="{{url_for('recommender.recommended', page= page - 1 )}}"><span class="uk-margin-small-right" uk-pagination-previous></span>Previous</a></li>
+    <li class="uk-margin-auto-left"><a href="{{url_for('recommender.recommended_next_page', page= page - 1 )}}"><span class="uk-margin-small-right" uk-pagination-previous></span>Previous</a></li>
     {% else %}
     <li class="uk-margin-auto-left"><a href="#"><span class="uk-margin-small-right" uk-pagination-previous></span>Previous</a></li>
     {% endif %}
-    <li class="uk-margin-auto-right"><a href="{{url_for('recommender.recommended', page= page + 1 )}}">Next<span class="uk-margin-small-left" uk-pagination-next></span></a></li>
+    <li class="uk-margin-auto-right"><a href="{{url_for('recommender.recommended_next_page', page= page + 1 )}}">Next<span class="uk-margin-small-left" uk-pagination-next></span></a></li>
 </ul>
 
 {% endblock %}
