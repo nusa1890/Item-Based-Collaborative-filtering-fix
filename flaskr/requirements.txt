@@ -1,5 +1,5 @@
 flask
-Flask-babel
+Flask-babel == 2.0.0
 scipy
 pandas
 numpy
